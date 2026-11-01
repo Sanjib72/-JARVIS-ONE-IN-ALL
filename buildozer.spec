@@ -1,22 +1,18 @@
 [app]
-title = JARVIS ONE IN ALL
-package.name = jarvisoneinall
-package.domain = com.sanjib.jarvis
-
+title = JARVIS
+package.name = jarvisapp
+package.domain = com.sanjib.jarvisapp
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv
 version = 1.0
 requirements = python3,kivy
 orientation = portrait
-fullscreen = 0
-
-[buildozer]
-log_level = 2
-warn_on_root = 1
-
-[app:android]
 android.permissions = INTERNET
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
 android.accept_sdk_license_agreement = True
+android.archs = arm64-v8a, armeabi-v7a
+
+[buildozer]
+log_level = 2
