@@ -1,58 +1,36 @@
-# JARVIS ONE IN ALL - FINAL BY SANJIB
-# Owner: sanjib.mridha72@gmail.com = FREE
-# Features: No Ads + Monthly/Yearly/Lifetime + 50+ Lang + PIN Lock
-
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
+Window.clearcolor = (0.05, 0.05, 0.1, 1)
 
-Window.clearcolor = (0.05, 0.05, 0.12, 1)
-OWNER_EMAIL = "sanjib.mridha72@gmail.com"
-
-class JarvisApp(App):
+class JARVIS(App):
     def build(self):
-        main = BoxLayout(orientation='vertical', padding=20, spacing=12)
-        
-        main.add_widget(Label(text='JARVIS ONE IN ALL', font_size=28, bold=True, color=(0,0.7,1,1), size_hint_y=0.15))
-        main.add_widget(Label(text='by Sanjib | NO ADS | Owner FREE', font_size=12, color=(0,1,0,1), size_hint_y=0.08))
-        
-        features = BoxLayout(orientation='vertical', spacing=8, size_hint_y=0.5)
-        features.add_widget(Label(text='[1] 50+ Languages - First Select', font_size=12))
-        features.add_widget(Label(text='[2] Law - 1 Device=1 Trial, Privacy Safe', font_size=12))
-        features.add_widget(Label(text='[3] Genius - Math, Code, Scan, Translate', font_size=12))
-        features.add_widget(Label(text='[4] App Finder + World Knowledge', font_size=12))
-        features.add_widget(Label(text='[5] SUBSCRIPTION:', font_size=13, bold=True, color=(1,0.8,0,1)))
-        features.add_widget(Label(text=' Monthly 99 | Yearly 499 (58% OFF) | Lifetime 999', font_size=12, color=(1,0.8,0,1)))
-        features.add_widget(Label(text='[6] PIN Lock + Device ID Lock + Help', font_size=12))
-        main.add_widget(features)
-
-        self.input = TextInput(hint_text='Ask anything to JARVIS...', size_hint_y=0.1, multiline=False)
-        main.add_widget(self.input)
-
-        self.output = Label(text='JARVIS Ready! All Morning Features Added!', size_hint_y=0.15)
-        main.add_widget(self.output)
-
-        btn1 = Button(text='ASK JARVIS', background_color=(0,0.5,1,1), size_hint_y=0.1)
-        btn1.bind(on_press=self.ask)
-        main.add_widget(btn1)
-
-        btn2 = Button(text='I AGREE - START JARVIS', background_color=(0,0.8,0.3,1), size_hint_y=0.12)
-        btn2.bind(on_press=self.start)
-        main.add_widget(btn2)
-
+        main = BoxLayout(orientation='vertical', padding=10, spacing=8)
+        main.add_widget(Label(text='JARVIS ONE IN ALL', font_size=22, bold=True, color=(0, 1, 1, 1), size_hint_y=None, height=40))
+        main.add_widget(Label(text='by Sanjib | NO ADS | Owner FREE', font_size=12, color=(0, 1, 0, 1), size_hint_y=None, height=20))
+        self.input_box = TextInput(hint_text='Type Hi...', multiline=False, size_hint_y=None, height=45)
+        main.add_widget(self.input_box)
+        btn_ask = Button(text='ASK JARVIS', background_color=(0, 1, 1, 1), bold=True, size_hint_y=None, height=50)
+        btn_ask.bind(on_press=self.ask_jarvis)
+        main.add_widget(btn_ask)
+        btn_start = Button(text='I AGREE - START JARVIS', background_color=(0, 1, 0, 1), bold=True, size_hint_y=None, height=50)
+        btn_start.bind(on_press=self.start_jarvis)
+        main.add_widget(btn_start)
+        scroll = ScrollView(size_hint=(1, 1))
+        self.output = Label(text='Welcome Boss! Owner FREE Activated!', font_size=13, color=(1, 1, 0, 1), size_hint_y=None, text_size=(Window.width - 20, None))
+        self.output.bind(texture_size=self.output.setter('size'))
+        scroll.add_widget(self.output)
+        main.add_widget(scroll)
         return main
-
-    def ask(self, x):
-        q = self.input.text
-        if q:
-            self.output.text = f"You: {q}\nJARVIS: Done Boss! Full version ready!"
-        else:
-            self.output.text = "Please type your question!"
-
-    def start(self, x):
-        self.output.text = "JARVIS Started! No Ads Active! Subscriptions Active!"
-
-JarvisApp().run()
+    def start_jarvis(self, instance):
+        self.output.text = "✅ JARVIS STARTED Boss!\n✅ No Ads\n✅ Owner: sanjib.mridha72@gmail.com FREE Lifetime!\n✅ All Features Ready!"
+    def ask_jarvis(self, instance):
+        q=self.input_box.text
+        if not q: self.output.text="Type something!"; return
+        self.output.text=f"JARVIS Reply to: {q}\n✅ Got it Boss! No Ads Active!"
+        self.input_box.text=""
+JARVIS().run()
